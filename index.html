@@ -14,11 +14,11 @@
 
   <style>
     body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    .sidebar-active {
-      background-color: #e0f2fe;
-      color: #0369a1;
-      font-weight: 700;
-      border-right: 4px solid #0284c7;
+    .sidebar-btn.active {
+      background-color: #e0f2fe !important;
+      color: #0369a1 !important;
+      font-weight: 700 !important;
+      border-right: 4px solid #0284c7 !important;
     }
     .step-content { display: none; }
     .step-content.active { display: block; }
@@ -27,7 +27,7 @@
 <body class="bg-slate-100 text-slate-800 h-screen flex flex-col overflow-hidden">
 
   <!-- TOP HEADER -->
-  <header class="bg-gradient-to-r from-sky-700 to-blue-900 text-white px-6 py-3 shadow-md flex justify-between items-center z-20">
+  <header class="bg-gradient-to-r from-sky-700 to-blue-900 text-white px-6 py-3 shadow-md flex justify-between items-center z-20 shrink-0">
     <div class="flex items-center gap-3">
       <i class="fa-solid fa-flask-vial text-2xl text-sky-300"></i>
       <div>
@@ -39,7 +39,7 @@
     <!-- Meeting Selector -->
     <div class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-xs">
       <span class="font-semibold text-sky-200">Pilih Pertemuan:</span>
-      <select id="meeting-select" onchange="switchMeeting(this.value)" class="bg-sky-800 text-white font-bold rounded px-2 py-1 outline-none">
+      <select id="meeting-select" class="bg-sky-800 text-white font-bold rounded px-2 py-1 outline-none cursor-pointer">
         <option value="1">Pertemuan 1: Suhu & Skala Suhu</option>
         <option value="2">Pertemuan 2: Kalor & Perubahan Wujud</option>
         <option value="3">Pertemuan 3: Perpindahan Kalor</option>
@@ -50,7 +50,7 @@
   <!-- MAIN WRAPPER: SIDEBAR + CONTENT AREA -->
   <div class="flex flex-1 overflow-hidden">
 
-    <!-- LEFT SIDEBAR NAVIGATION (Sesuai Format Gambar) -->
+    <!-- LEFT SIDEBAR NAVIGATION (Format Sesuai Tampilan LKPD Digital) -->
     <aside class="w-72 bg-white border-r border-slate-200 overflow-y-auto flex flex-col shrink-0 shadow-sm">
       <div class="p-4 border-b bg-slate-50">
         <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase">Tahapan LKPD</span>
@@ -58,40 +58,40 @@
       </div>
 
       <nav class="flex-1 py-2 text-xs font-medium space-y-0.5" id="sidebar-menu">
-        <button onclick="goToStep(1)" id="btn-step-1" class="w-full text-left px-4 py-3 flex items-center gap-3 transition sidebar-active">
+        <button data-step="1" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 transition active">
           <span class="w-5 text-center font-bold">1.</span> Cover & Judul
         </button>
-        <button onclick="goToStep(2)" id="btn-step-2" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="2" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">2.</span> Identitas Peserta Didik
         </button>
-        <button onclick="goToStep(3)" id="btn-step-3" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="3" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">3.</span> Tujuan Pembelajaran
         </button>
-        <button onclick="goToStep(4)" id="btn-step-4" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="4" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">4.</span> Petunjuk Penggunaan
         </button>
-        <button onclick="goToStep(5)" id="btn-step-5" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="5" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">5.</span> Orientasi Masalah
         </button>
-        <button onclick="goToStep(6)" id="btn-step-6" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="6" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">6.</span> Ayo Mengamati
         </button>
-        <button onclick="goToStep(7)" id="btn-step-7" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="7" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">7.</span> Laboratorium WebAR
         </button>
-        <button onclick="goToStep(8)" id="btn-step-8" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="8" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">8.</span> Data Percobaan
         </button>
-        <button onclick="goToStep(9)" id="btn-step-9" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="9" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">9.</span> Pertanyaan Analisis
         </button>
-        <button onclick="goToStep(10)" id="btn-step-10" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="10" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">10.</span> Ayo Berdiskusi
         </button>
-        <button onclick="goToStep(11)" id="btn-step-11" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="11" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">11.</span> Ayo Menyimpulkan
         </button>
-        <button onclick="goToStep(12)" id="btn-step-12" class="w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+        <button data-step="12" class="sidebar-btn w-full text-left px-4 py-3 flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
           <span class="w-5 text-center font-bold">12.</span> Latihan & Refleksi
         </button>
       </nav>
@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        <!-- STEP 2: IDENTITAS PESERTA DIDIK (Sesuai Gambar) -->
+        <!-- STEP 2: IDENTITAS PESERTA DIDIK -->
         <div id="step-2" class="step-content space-y-6">
           <div class="border-b pb-3">
             <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
@@ -158,7 +158,6 @@
             </h2>
           </div>
           <ul id="tujuan-list" class="list-disc list-inside space-y-2 text-sm text-slate-700 bg-sky-50 p-4 rounded-lg border border-sky-100">
-            <!-- Dynamic Content -->
           </ul>
           <div class="flex justify-between pt-4">
             <button onclick="goToStep(2)" class="bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg hover:bg-slate-300">Kembali</button>
@@ -186,14 +185,13 @@
           </div>
         </div>
 
-        <!-- STEP 5: ORIENTASI MASALAH (PBL Tahap 1) -->
+        <!-- STEP 5: ORIENTASI MASALAH -->
         <div id="step-5" class="step-content space-y-6">
           <div class="border-b pb-3">
             <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Tahap 1 PBL: Orientasi Masalah</span>
             <h2 id="orientasi-title" class="text-xl font-bold text-slate-800">Sensasi Indra Peraba vs Pengukuran Objektif</h2>
           </div>
           <div id="orientasi-text" class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg text-sm text-slate-800 leading-relaxed">
-            <!-- Dynamic Content -->
           </div>
           <div class="flex justify-between pt-4">
             <button onclick="goToStep(4)" class="bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg hover:bg-slate-300">Kembali</button>
@@ -209,7 +207,6 @@
             </h2>
           </div>
           <p id="mengamati-desc" class="text-sm text-slate-700 leading-relaxed">
-            <!-- Dynamic Content -->
           </p>
           <div class="flex justify-between pt-4">
             <button onclick="goToStep(5)" class="bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg hover:bg-slate-300">Kembali</button>
@@ -239,7 +236,6 @@
 
             <!-- Dynamic Interactive Controls -->
             <div id="webar-controls" class="mt-4 bg-slate-800/90 p-4 rounded-lg space-y-3 text-xs">
-              <!-- Rendered Dynamically Based on Meeting -->
             </div>
           </div>
 
@@ -255,14 +251,10 @@
             <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
               <i class="fa-solid fa-table text-sky-600"></i> Data Percobaan
             </h2>
-            <button onclick="logWebARData()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">
-              <i class="fa-solid fa-download mr-1"></i> Ambil Data dari WebAR
-            </button>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-xs text-left border-collapse border border-slate-300" id="table-data">
-              <!-- Rendered Dynamically -->
             </table>
           </div>
 
@@ -280,7 +272,6 @@
             </h2>
           </div>
           <div id="analisis-container" class="space-y-4 text-xs">
-            <!-- Dynamic Content -->
           </div>
           <div class="flex justify-between pt-4">
             <button onclick="goToStep(8)" class="bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg hover:bg-slate-300">Kembali</button>
@@ -318,7 +309,7 @@
           </div>
         </div>
 
-        <!-- STEP 12: LATIHAN & REFLEKSI (FORMATIF & SUMATIF LENGKAP) -->
+        <!-- STEP 12: LATIHAN & REFLEKSI -->
         <div id="step-12" class="step-content space-y-8">
           
           <!-- Penilaian Formatif -->
@@ -327,9 +318,8 @@
               <i class="fa-solid fa-clipboard-check text-purple-600"></i> Penilaian Formatif (Soal HOTS Interaktif)
             </h3>
             <div id="quiz-container" class="space-y-4 text-xs text-slate-800">
-              <!-- Rendered Dynamically -->
             </div>
-            <button onclick="checkQuiz()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-4 py-2 rounded-lg text-xs">
+            <button onclick="checkQuiz()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-4 py-2 rounded-lg text-xs transition">
               Cek Jawaban Formatif
             </button>
             <div id="quiz-score" class="hidden text-xs font-bold p-2 rounded bg-white border"></div>
@@ -352,7 +342,7 @@
 
           <div class="flex justify-between pt-4">
             <button onclick="goToStep(11)" class="bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg hover:bg-slate-300">Kembali</button>
-            <button onclick="alert('LKPD dan Refleksi Anda telah tersimpan!')" class="bg-emerald-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-emerald-700">
+            <button onclick="alert('LKPD dan Refleksi Anda telah berhasil tersimpan!')" class="bg-emerald-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-emerald-700">
               <i class="fa-solid fa-paper-plane mr-1"></i> Simpan & Selesai
             </button>
           </div>
@@ -368,7 +358,7 @@
     let currentMeeting = "1";
     let currentStep = 1;
 
-    // DATA TIAP PERTEMUAN
+    // DATA SETIAP PERTEMUAN
     const meetingData = {
       "1": {
         title: "Pertemuan 1: Suhu & Skala Suhu",
@@ -393,7 +383,7 @@
             </div>
             <div>
               <label class="block text-slate-300 mb-1">Skala Tampilan 3D:</label>
-              <select id="p1-skala" onchange="updateP1Calc()" class="w-full bg-slate-700 text-white rounded p-1">
+              <select id="p1-skala" class="w-full bg-slate-700 text-white rounded p-1">
                 <option value="C">Celsius (°C)</option>
                 <option value="F">Fahrenheit (°F)</option>
                 <option value="K">Kelvin (K)</option>
@@ -403,7 +393,7 @@
           </div>
           <div>
             <div class="flex justify-between mb-1">
-              <span>Suhu Suhu Celsius:</span>
+              <span>Suhu Celsius:</span>
               <span id="p1-val" class="text-sky-400 font-bold">50 °C</span>
             </div>
             <input type="range" id="p1-slider" min="-10" max="110" value="50" oninput="updateP1Slider(this.value)" class="w-full accent-sky-400">
@@ -411,7 +401,7 @@
           <div class="grid grid-cols-4 gap-1 text-center font-mono text-[10px] bg-slate-950 p-2 rounded border border-slate-700">
             <div><span class="text-slate-400 block">CELSIUS</span><span id="disp-c">50 °C</span></div>
             <div><span class="text-slate-400 block">FAHRENHEIT</span><span id="disp-f" class="text-orange-400">122 °F</span></div>
-            <div><span class="text-slate-400 block">KELVIN</span><span id="disp-k" class="text-emerald-400">323 K</span></div>
+            <div><span class="text-slate-400 block">KELVIN</span><span id="disp-k" class="text-emerald-400">323.15 K</span></div>
             <div><span class="text-slate-400 block">REAMUR</span><span id="disp-r" class="text-purple-400">40 °R</span></div>
           </div>
         `,
@@ -426,15 +416,11 @@
               <th class="border p-2">°R</th>
             </tr>
           </thead>
-          <tbody id="table-body-p1">
-            <tr>
-              <td class="border p-2">1</td>
-              <td class="border p-2">Air Es</td>
-              <td class="border p-2">0</td>
-              <td class="border p-2">32</td>
-              <td class="border p-2">273</td>
-              <td class="border p-2">0</td>
-            </tr>
+          <tbody>
+            <tr><td class="border p-2">1</td><td class="border p-2 font-medium">Air Es</td><td class="border p-2">0</td><td class="border p-2">32</td><td class="border p-2">273.15</td><td class="border p-2">0</td></tr>
+            <tr><td class="border p-2">2</td><td class="border p-2 font-medium">Air Suhu Ruang</td><td class="border p-2">25</td><td class="border p-2">77</td><td class="border p-2">298.15</td><td class="border p-2">20</td></tr>
+            <tr><td class="border p-2">3</td><td class="border p-2 font-medium">Air Hangat</td><td class="border p-2">50</td><td class="border p-2">122</td><td class="border p-2">323.15</td><td class="border p-2">40</td></tr>
+            <tr><td class="border p-2">4</td><td class="border p-2 font-medium">Air Panas</td><td class="border p-2">100</td><td class="border p-2">212</td><td class="border p-2">373.15</td><td class="border p-2">80</td></tr>
           </tbody>
         `,
         analisis: [
@@ -498,15 +484,10 @@
               <th class="border p-2">ΔT (°C)</th>
             </tr>
           </thead>
-          <tbody id="table-body-p2">
-            <tr>
-              <td class="border p-2">Air</td>
-              <td class="border p-2">500</td>
-              <td class="border p-2">10000</td>
-              <td class="border p-2">25</td>
-              <td class="border p-2">29.78</td>
-              <td class="border p-2 font-bold text-sky-600">4.78</td>
-            </tr>
+          <tbody>
+            <tr><td class="border p-2 font-medium">Air</td><td class="border p-2">500</td><td class="border p-2">10000</td><td class="border p-2">25</td><td class="border p-2">29.78</td><td class="border p-2 font-bold text-sky-600">4.78</td></tr>
+            <tr><td class="border p-2 font-medium">Aluminium</td><td class="border p-2">500</td><td class="border p-2">10000</td><td class="border p-2">25</td><td class="border p-2">47.22</td><td class="border p-2 font-bold text-sky-600">22.22</td></tr>
+            <tr><td class="border p-2 font-medium">Besi</td><td class="border p-2">500</td><td class="border p-2">10000</td><td class="border p-2">25</td><td class="border p-2">69.44</td><td class="border p-2 font-bold text-sky-600">44.44</td></tr>
           </tbody>
         `,
         analisis: [
@@ -550,9 +531,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="border p-2">1</td><td class="border p-2">Batang Logam Dipanaskan</td><td class="border p-2">Konduksi</td><td class="border p-2">Zat Padat (Logam)</td></tr>
-            <tr><td class="border p-2">2</td><td class="border p-2">Air Mendidih Berputar</td><td class="border p-2">Konveksi</td><td class="border p-2">Zat Cair (Fluida)</td></tr>
-            <tr><td class="border p-2">3</td><td class="border p-2">Panas Matahari sampai ke Bumi</td><td class="border p-2">Radiasi</td><td class="border p-2">Tanpa Medium (Hampa)</td></tr>
+            <tr><td class="border p-2">1</td><td class="border p-2 font-medium">Batang Logam Dipanaskan</td><td class="border p-2">Konduksi</td><td class="border p-2">Zat Padat (Logam)</td></tr>
+            <tr><td class="border p-2">2</td><td class="border p-2 font-medium">Air Mendidih Berputar</td><td class="border p-2">Konveksi</td><td class="border p-2">Zat Cair (Fluida)</td></tr>
+            <tr><td class="border p-2">3</td><td class="border p-2 font-medium">Panas Matahari sampai ke Bumi</td><td class="border p-2">Radiasi</td><td class="border p-2">Tanpa Medium (Hampa)</td></tr>
           </tbody>
         `,
         analisis: [
@@ -567,17 +548,25 @@
       }
     };
 
-    // NAVIGASI STEP
+    // FUNGSI GANTI TAHAP STEP (PERPINDAHAN HALAMAN)
     function goToStep(stepNum) {
-      currentStep = stepNum;
+      currentStep = parseInt(stepNum);
+      
+      // Sembunyikan semua step, tampilkan yang dipilih
       document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-      document.getElementById(`step-${stepNum}`).classList.add('active');
+      const activeEl = document.getElementById(`step-${stepNum}`);
+      if (activeEl) activeEl.classList.add('active');
 
-      document.querySelectorAll('#sidebar-menu button').forEach(btn => btn.classList.remove('sidebar-active'));
-      document.getElementById(`btn-step-${stepNum}`).classList.add('sidebar-active');
+      // Update style tombol sidebar
+      document.querySelectorAll('#sidebar-menu .sidebar-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-step') == stepNum) {
+          btn.classList.add('active');
+        }
+      });
     }
 
-    // SWITCH PERTEMUAN
+    // FUNGSI SWITCH PERTEMUAN (PERTEMUAN 1, 2, 3)
     function switchMeeting(mNum) {
       currentMeeting = mNum;
       const data = meetingData[mNum];
@@ -585,7 +574,7 @@
       document.getElementById('sidebar-meeting-title').innerText = data.title;
       document.getElementById('cover-title').innerText = data.coverTitle;
       
-      // Update Tujuan List
+      // Update Tujuan
       const tList = document.getElementById('tujuan-list');
       tList.innerHTML = data.tujuan.map(t => `<li>${t}</li>`).join('');
 
@@ -593,15 +582,13 @@
       document.getElementById('orientasi-text').innerText = data.orientasi;
       document.getElementById('mengamati-desc').innerText = data.mengamati;
 
-      // Update WebAR Controls
+      // Update WebAR Controls & Table Data
       document.getElementById('webar-controls').innerHTML = data.controlsHTML;
-
-      // Update Data Table Header
       document.getElementById('table-data').innerHTML = data.tableHeader;
 
       // Update Analisis
       const aCont = document.getElementById('analisis-container');
-      aCont.innerHTML = data.analisis.map((q, idx) => `
+      aCont.innerHTML = data.analisis.map((q) => `
         <div>
           <label class="block font-semibold mb-1 text-slate-800">${q}</label>
           <textarea class="w-full p-2 border rounded-lg text-xs outline-sky-500" rows="2" placeholder="Jawaban Anda..."></textarea>
@@ -614,7 +601,7 @@
         <div class="space-y-1">
           <p class="font-bold">${idx + 1}. ${item.q}</p>
           <div class="space-y-1 pl-2">
-            ${item.options.map(opt => `<label class="block"><input type="radio" name="qz-${idx}" value="${opt[0]}"> ${opt}</label>`).join('')}
+            ${item.options.map(opt => `<label class="block cursor-pointer"><input type="radio" name="qz-${idx}" value="${opt[0]}"> ${opt}</label>`).join('')}
           </div>
         </div>
       `).join('');
@@ -623,7 +610,7 @@
       if (mNum === "2") runP2Calc();
     }
 
-    // THREE.JS WEBAR CANVAS SIMULATION
+    // SIMULASI THREE.JS WEBAR CANVAS
     let scene, camera, renderer, 3dObj;
     function initThree() {
       const container = document.getElementById('webar-canvas-container');
@@ -642,18 +629,18 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        3dObj.rotation.y += 0.01;
+        if (3dObj) 3dObj.rotation.y += 0.01;
         renderer.render(scene, camera);
       }
       animate();
     }
 
-    // WEBAR LOGIC INTERACTIONS
+    // INTERAKSI P1, P2, P3
     function updateP1Slider(val) {
       document.getElementById('p1-val').innerText = `${val} °C`;
       document.getElementById('disp-c').innerText = `${val} °C`;
       document.getElementById('disp-f').innerText = `${((val * 9/5) + 32).toFixed(1)} °F`;
-      document.getElementById('disp-k').innerText = `${(parseFloat(val) + 273.15).toFixed(1)} K`;
+      document.getElementById('disp-k').innerText = `${(parseFloat(val) + 273.15).toFixed(2)} K`;
       document.getElementById('disp-r').innerText = `${(val * 4/5).toFixed(1)} °R`;
     }
 
@@ -722,7 +709,21 @@
       alert(`Terima kasih atas refleksi emosi Anda ${emoji}`);
     }
 
+    // INITIALIZATION & EVENT LISTENERS
     window.onload = function() {
+      // Event Listener Sidebar Menu Click
+      document.querySelectorAll('#sidebar-menu .sidebar-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const step = this.getAttribute('data-step');
+          goToStep(step);
+        });
+      });
+
+      // Event Listener Select Pertemuan
+      document.getElementById('meeting-select').addEventListener('change', function() {
+        switchMeeting(this.value);
+      });
+
       switchMeeting("1");
       initThree();
     };
